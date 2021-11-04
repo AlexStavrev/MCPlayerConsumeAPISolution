@@ -1,6 +1,8 @@
 ﻿using MCPlayerApiClient.ApiClient;
 using MCPlayerApplication.ExtensionMethods;
 using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -31,24 +33,34 @@ namespace MCPlayerApplication
             _inCooldown = true;
 
             string uuid = await LoadUUIDAsync();
-
-            await LoadPlayerImageAsync(uuid);
             lblUUID.Text = uuid;
 
-            listBoxNames.Items.Clear();
-            (await DataAcccess.GetAllNamesAsync(uuid)).Reverse().ToList().ForEach(name => listBoxNames.AddItemThreadSafe(name));
+            List<Task> tasks = new()
+            {
+                Task.Run(() => LoadPlayerImageAsync(uuid)),
+                Task.Run(() => LoadPlayerNamesAsync(uuid))
+            };
 
-            await Task.Delay(_buttonCooldown);
+            await Task.WhenAll(tasks);
             _inCooldown = false;
         }
 
         private async Task LoadPlayerImageAsync(string uuid)
         {
+            //await Task.Delay(5000);
             picturePlayerBodyImage.Image = await DataAcccess.GetBodyImageFromUUIDAsync(uuid);
         }
+
+        private async Task LoadPlayerNamesAsync(string uuid)
+        {
+            //await Task.Delay(10000);
+            listBoxNames.Items.Clear();
+            (await DataAcccess.GetAllNamesAsync(uuid)).Reverse().ToList().ForEach(name => listBoxNames.AddItemThreadSafe(name));
+        }
+
         private async Task<string> LoadUUIDAsync()
         {
-            await Task.Delay(1000);
+            //await Task.Delay(5000);
             return await DataAcccess.GetUUIDFromNameAsync(txtName.Text);
         }
 
@@ -59,7 +71,7 @@ namespace MCPlayerApplication
 
         private async Task loadInitialImageAsync()
         {
-            picturePlayerBodyImage.Image = await DataAcccess.GetBodyImageFromUUIDAsync("00000000-0000-0000-0000-000000000000");
+            await LoadPlayerImageAsync("00000000-0000-0000-0000-000000000000");
         }
     }
 }
