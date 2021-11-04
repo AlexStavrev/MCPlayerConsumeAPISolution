@@ -1,4 +1,5 @@
 ﻿using MCPlayerApiClient.DTOs;
+using MCPlayerApiClient.Tools;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -12,30 +13,38 @@ namespace MCPlayerApiClient.ApiClient
 {
     public class PlayerApiClient : IPlayerApiClient
     {
-        private RestClient _restClient;
+        private readonly RestClient _restClient;
         public PlayerApiClient(string apiUri) => _restClient = new RestClient(new Uri(apiUri));
 
         public async Task<IEnumerable<string>> GetAllNamesAsync(string uuid)
         {
-            RestClient client = new($"https://api.mojang.com/");
+            var response = await _restClient.RequestAsync<IEnumerable<NameChangeDto>>(Method.GET, $"user/profiles/{uuid}/names");
 
-            RestRequest request = new("user/profiles/{uuid}/names", Method.GET);
-            request.AddParameter("uuid", uuid, ParameterType.UrlSegment);
-            request.OnBeforeDeserialization = resp => { resp.ContentType = "application/json"; };
-
-            IRestResponse queryResult = await client.ExecuteAsync(request);
-
-            List<NameChanges> names = JsonSerializer.Deserialize<List<NameChanges>>(queryResult.Content);
+            if (!response.IsSuccessful)
+            {
+                throw new Exception($"Error retrieving all names for '{uuid}'. Message was: {response.ErrorException?.Message}");
+            }
 
             IEnumerable<string> GetListOfNames()
             {
-                foreach (NameChanges player in names)
+                foreach (NameChangeDto nameChange in response.Data)
                 {
-                    yield return player.name;
+                    yield return nameChange.Name;
                 }
             }
-
             return GetListOfNames();
+        }
+
+        public async Task<IEnumerable<NameChangeDto>> GetAllNameChangesAsync(string uuid)
+        {
+            var response = await _restClient.RequestAsync<IEnumerable<NameChangeDto>>(Method.GET, $"user/profiles/{uuid}/names");
+
+            if (!response.IsSuccessful)
+            {
+                throw new Exception($"Error retrieving all names for '{uuid}'. Message was: {response.ErrorException?.Message}");
+            }
+
+            return response.Data;
         }
 
         public async Task<Image> GetBodyImageFromUUIDAsync(string uuid)
@@ -43,21 +52,32 @@ namespace MCPlayerApiClient.ApiClient
             return await GetImageAsync($"https://mc-heads.net/body/{uuid}");
         }
 
-        public async Task<string> GetUUIDFromNameAsync(string name, int scale)
+        public async Task<PlayerDto> GetPlayerFromName(string name)
         {
-            RestClient client = new($"https://api.mojang.com/");
+            var response = await _restClient.RequestAsync<PlayerDto>(Method.GET, $"users/profiles/minecraft/{name}");
 
-            RestRequest request = new("users/profiles/minecraft/{name}?scale={scale}", Method.GET);
-            request.AddParameter("name", name, ParameterType.UrlSegment);
-            request.AddParameter("scale", scale, ParameterType.UrlSegment);
+            if (!response.IsSuccessful)
+            {
+                throw new Exception($"Error retrieving data for '{name}'. Message was: {response.ErrorException?.Message}");
+            }
 
-            request.OnBeforeDeserialization = resp => { resp.ContentType = "application/json"; };
+            PlayerDto player = response.Data;
+            player.Names = await GetAllNameChangesAsync(player.Id);
 
-            IRestResponse queryResult = await client.ExecuteAsync(request);
-
-            PlayerUUIDTuple player = JsonSerializer.Deserialize<PlayerUUIDTuple>(queryResult.Content);
-            return player.id;
+            return player;
         }
+
+        public async Task<string> GetUUIDFromNameAsync(string name)
+        {
+            var response = await _restClient.RequestAsync<PlayerDto>(Method.GET, $"users/profiles/minecraft/{name}");
+
+            if(!response.IsSuccessful)
+            {
+                throw new Exception($"Error retrieving UUID for '{name}'. Message was: {response.ErrorException?.Message}");
+            }
+            return response.Data.Id;
+        }
+
 
         private async Task<Image> GetImageAsync(string url)
         {
@@ -77,21 +97,67 @@ namespace MCPlayerApiClient.ApiClient
             return taskCompletionSource.Task.Result;
         }
 
-        public Task<Player> GetPlayerFromUUID(string uuid)
-        {
-            throw new NotImplementedException();
-        }
+        #region forDeleteion
+        //public async Task<IEnumerable<string>> GetAllNamesAsync(string uuid)
+        //{
+        //    RestClient client = new($"https://api.mojang.com/");
 
-        internal class PlayerUUIDTuple
-        {
-            public string name { get; set; }
-            public string id { get; set; }
-        }
+        //    RestRequest request = new("user/profiles/{uuid}/names", Method.GET);
+        //    request.AddParameter("uuid", uuid, ParameterType.UrlSegment);
+        //    request.OnBeforeDeserialization = resp => { resp.ContentType = "application/json"; };
 
-        public class NameChanges
-        {
-            public string name { get; set; }
-            public long changedToAt { get; set; }
-        }
+        //    IRestResponse queryResult = await client.ExecuteAsync(request);
+
+        //    List<NameChanges> names = JsonSerializer.Deserialize<List<NameChanges>>(queryResult.Content);
+
+        //    IEnumerable<string> GetListOfNames()
+        //    {
+        //        foreach (NameChanges player in names)
+        //        {
+        //            yield return player.name;
+        //        }
+        //    }
+
+        //    return GetListOfNames();
+        //}
+
+        //public async Task<Image> GetBodyImageFromUUIDAsync(string uuid)
+        //{
+        //    return await GetImageAsync($"https://mc-heads.net/body/{uuid}");
+        //}
+
+        //public async Task<string> GetUUIDFromNameAsync(string name, int scale)
+        //{
+        //    RestClient client = new($"https://api.mojang.com/");
+
+        //    RestRequest request = new("users/profiles/minecraft/{name}?scale={scale}", Method.GET);
+        //    request.AddParameter("name", name, ParameterType.UrlSegment);
+        //    request.AddParameter("scale", scale, ParameterType.UrlSegment);
+
+        //    request.OnBeforeDeserialization = resp => { resp.ContentType = "application/json"; };
+
+        //    IRestResponse queryResult = await client.ExecuteAsync(request);
+
+        //    PlayerUUIDTuple player = JsonSerializer.Deserialize<PlayerUUIDTuple>(queryResult.Content);
+        //    return player.id;
+        //}
+
+        //public Task<Player> GetPlayerFromUUID(string uuid)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //internal class PlayerUUIDTuple
+        //{
+        //    public string name { get; set; }
+        //    public string id { get; set; }
+        //}
+
+        //public class NameChanges
+        //{
+        //    public string name { get; set; }
+        //    public long changedToAt { get; set; }
+        //}
+        #endregion
     }
 }

@@ -1,5 +1,5 @@
 ﻿using MCPlayerApiClient.ApiClient;
-using MCPlayerApplication.ExtensionMethods;
+using MCPlayerApplication.Tools;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -11,20 +11,18 @@ namespace MCPlayerApplication
 {
     public partial class MCPlayerFormApplication : Form
     {
-        private readonly int _buttonCooldown;
         private bool _inCooldown;
 
         public IPlayerApiClient DataAcccess { get; set; }
 
         public MCPlayerFormApplication()
         {
-            _buttonCooldown = 250;
             _inCooldown = false;
             DataAcccess = new PlayerApiClient("https://api.mojang.com/");
             InitializeComponent();
         }
 
-        private async void button1_Click(object sender, EventArgs e)
+        private async void btnSubmit_Click(object sender, EventArgs e)
         {
             if(_inCooldown)
             {
@@ -35,6 +33,7 @@ namespace MCPlayerApplication
             string uuid = await LoadUUIDAsync();
             lblUUID.Text = uuid;
 
+            listBoxNames.Items.Clear();
             List<Task> tasks = new()
             {
                 Task.Run(() => LoadPlayerImageAsync(uuid)),
@@ -54,7 +53,6 @@ namespace MCPlayerApplication
         private async Task LoadPlayerNamesAsync(string uuid)
         {
             //await Task.Delay(10000);
-            listBoxNames.Items.Clear();
             (await DataAcccess.GetAllNamesAsync(uuid)).Reverse().ToList().ForEach(name => listBoxNames.AddItemThreadSafe(name));
         }
 
@@ -66,10 +64,10 @@ namespace MCPlayerApplication
 
         private async void Form1_Load(object sender, EventArgs e)
         {
-            await loadInitialImageAsync();
+            await LoadInitialImageAsync();
         }
 
-        private async Task loadInitialImageAsync()
+        private async Task LoadInitialImageAsync()
         {
             await LoadPlayerImageAsync("00000000-0000-0000-0000-000000000000");
         }

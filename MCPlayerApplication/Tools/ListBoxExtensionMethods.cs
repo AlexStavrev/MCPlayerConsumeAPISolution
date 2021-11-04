@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace MCPlayerApplication.ExtensionMethods
+namespace MCPlayerApplication.Tools
 {
     public static class ListBoxExtensionMethods
     {

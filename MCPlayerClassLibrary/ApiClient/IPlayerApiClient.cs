@@ -7,9 +7,10 @@ namespace MCPlayerApiClient.ApiClient
 {
     public interface IPlayerApiClient
     {
-        Task<Image> GetBodyImageFromUUIDAsync(string uuid);
-        Task<Player> GetPlayerFromUUID(string uuid);
-        Task<string> GetUUIDFromNameAsync(string name, int scale = 10);
         Task<IEnumerable<string>> GetAllNamesAsync(string uuid);
+        Task<IEnumerable<NameChangeDto>> GetAllNameChangesAsync(string uuid);
+        Task<Image> GetBodyImageFromUUIDAsync(string uuid);
+        Task<PlayerDto> GetPlayerFromName(string name);
+        Task<string> GetUUIDFromNameAsync(string name);
     }
 }
