@@ -10,5 +10,11 @@ namespace MCPlayerApiClient.DTOs
 
         [JsonConverter(typeof(UnixDateTimeConverter))]
         public DateTime ChangedToAt { get; set; }
+
+        public override string ToString()
+        {
+            string at = (ChangedToAt.Date > DateTime.MinValue) ? $" - {ChangedToAt}" : "";
+            return $"{Name}{at}";
+        }
     }
 }

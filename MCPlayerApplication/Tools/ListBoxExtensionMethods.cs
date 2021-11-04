@@ -24,5 +24,26 @@ namespace MCPlayerApplication.Tools
                 }
             }
         }
+
+        public static void ClearThreadSafe(this ListBox listBox)
+        {
+            if (listBox.InvokeRequired)
+            {
+                listBox.Invoke(new MethodInvoker(delegate
+                {
+                    lock (listBox)
+                    {
+                        listBox.Items.Clear();
+                    }
+                }));
+            }
+            else
+            {
+                lock (listBox)
+                {
+                    listBox.Items.Clear();
+                }
+            }
+        }
     }
 }

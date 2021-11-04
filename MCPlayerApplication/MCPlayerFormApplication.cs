@@ -2,7 +2,6 @@
 using MCPlayerApplication.Tools;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -22,6 +21,11 @@ namespace MCPlayerApplication
             InitializeComponent();
         }
 
+        private async void Form1_Load(object sender, EventArgs e)
+        {
+            await LoadInitialImageAsync();
+        }
+
         private async void btnSubmit_Click(object sender, EventArgs e)
         {
             if(_inCooldown)
@@ -33,11 +37,11 @@ namespace MCPlayerApplication
             string uuid = await LoadUUIDAsync();
             lblUUID.Text = uuid;
 
-            listBoxNames.Items.Clear();
             List<Task> tasks = new()
             {
                 Task.Run(() => LoadPlayerImageAsync(uuid)),
-                Task.Run(() => LoadPlayerNamesAsync(uuid))
+                //Task.Run(() => LoadPlayerNamesAsync(uuid))
+                Task.Run(() => LoadPlayerNameChangesAsync(uuid))
             };
 
             await Task.WhenAll(tasks);
@@ -46,25 +50,24 @@ namespace MCPlayerApplication
 
         private async Task LoadPlayerImageAsync(string uuid)
         {
-            //await Task.Delay(5000);
             picturePlayerBodyImage.Image = await DataAcccess.GetBodyImageFromUUIDAsync(uuid);
         }
 
         private async Task LoadPlayerNamesAsync(string uuid)
         {
-            //await Task.Delay(10000);
+            listBoxNames.ClearThreadSafe();
             (await DataAcccess.GetAllNamesAsync(uuid)).Reverse().ToList().ForEach(name => listBoxNames.AddItemThreadSafe(name));
+        }
+
+        private async Task LoadPlayerNameChangesAsync(string uuid)
+        {
+            listBoxNames.ClearThreadSafe();
+            (await DataAcccess.GetAllNameChangesAsync(uuid)).Reverse().ToList().ForEach(name => listBoxNames.AddItemThreadSafe(name));
         }
 
         private async Task<string> LoadUUIDAsync()
         {
-            //await Task.Delay(5000);
             return await DataAcccess.GetUUIDFromNameAsync(txtName.Text);
-        }
-
-        private async void Form1_Load(object sender, EventArgs e)
-        {
-            await LoadInitialImageAsync();
         }
 
         private async Task LoadInitialImageAsync()
