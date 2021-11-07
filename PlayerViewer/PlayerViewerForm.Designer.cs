@@ -72,7 +72,7 @@ namespace PlayerViewer
             this.imagePlayerSkin.Margin = new System.Windows.Forms.Padding(10, 20, 10, 20);
             this.imagePlayerSkin.Name = "imagePlayerSkin";
             this.imagePlayerSkin.Padding = new System.Windows.Forms.Padding(10, 20, 10, 20);
-            this.imagePlayerSkin.Size = new System.Drawing.Size(269, 388);
+            this.imagePlayerSkin.Size = new System.Drawing.Size(269, 397);
             this.imagePlayerSkin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.imagePlayerSkin.TabIndex = 0;
             this.imagePlayerSkin.TabStop = false;
@@ -87,7 +87,7 @@ namespace PlayerViewer
             this.panelPicture.Margin = new System.Windows.Forms.Padding(10, 20, 10, 20);
             this.panelPicture.Name = "panelPicture";
             this.panelPicture.Padding = new System.Windows.Forms.Padding(10, 20, 10, 20);
-            this.panelPicture.Size = new System.Drawing.Size(289, 428);
+            this.panelPicture.Size = new System.Drawing.Size(289, 437);
             this.panelPicture.TabIndex = 1;
             // 
             // btnDownload
@@ -101,7 +101,7 @@ namespace PlayerViewer
             this.btnDownload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDownload.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnDownload.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.btnDownload.Location = new System.Drawing.Point(10, 368);
+            this.btnDownload.Location = new System.Drawing.Point(10, 377);
             this.btnDownload.Margin = new System.Windows.Forms.Padding(0);
             this.btnDownload.Name = "btnDownload";
             this.btnDownload.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
@@ -121,7 +121,7 @@ namespace PlayerViewer
             this.panelMain.Location = new System.Drawing.Point(0, 40);
             this.panelMain.Name = "panelMain";
             this.panelMain.Padding = new System.Windows.Forms.Padding(20);
-            this.panelMain.Size = new System.Drawing.Size(861, 468);
+            this.panelMain.Size = new System.Drawing.Size(884, 477);
             this.panelMain.TabIndex = 2;
             // 
             // panelRight
@@ -132,7 +132,7 @@ namespace PlayerViewer
             this.panelRight.Margin = new System.Windows.Forms.Padding(0);
             this.panelRight.Name = "panelRight";
             this.panelRight.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.panelRight.Size = new System.Drawing.Size(532, 428);
+            this.panelRight.Size = new System.Drawing.Size(555, 437);
             this.panelRight.TabIndex = 3;
             // 
             // panelPlayerInfo
@@ -145,7 +145,7 @@ namespace PlayerViewer
             this.panelPlayerInfo.Location = new System.Drawing.Point(20, 0);
             this.panelPlayerInfo.Name = "panelPlayerInfo";
             this.panelPlayerInfo.Padding = new System.Windows.Forms.Padding(20);
-            this.panelPlayerInfo.Size = new System.Drawing.Size(512, 428);
+            this.panelPlayerInfo.Size = new System.Drawing.Size(535, 437);
             this.panelPlayerInfo.TabIndex = 3;
             // 
             // panelNames
@@ -155,7 +155,7 @@ namespace PlayerViewer
             this.panelNames.Location = new System.Drawing.Point(20, 219);
             this.panelNames.Name = "panelNames";
             this.panelNames.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
-            this.panelNames.Size = new System.Drawing.Size(472, 189);
+            this.panelNames.Size = new System.Drawing.Size(495, 198);
             this.panelNames.TabIndex = 9;
             // 
             // listBoxNames
@@ -169,7 +169,7 @@ namespace PlayerViewer
             this.listBoxNames.ItemHeight = 31;
             this.listBoxNames.Location = new System.Drawing.Point(0, 10);
             this.listBoxNames.Name = "listBoxNames";
-            this.listBoxNames.Size = new System.Drawing.Size(472, 179);
+            this.listBoxNames.Size = new System.Drawing.Size(495, 188);
             this.listBoxNames.TabIndex = 1;
             this.listBoxNames.TabStop = false;
             // 
@@ -182,7 +182,7 @@ namespace PlayerViewer
             this.panelInformation.Margin = new System.Windows.Forms.Padding(0);
             this.panelInformation.Name = "panelInformation";
             this.panelInformation.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            this.panelInformation.Size = new System.Drawing.Size(472, 106);
+            this.panelInformation.Size = new System.Drawing.Size(495, 106);
             this.panelInformation.TabIndex = 8;
             // 
             // lblUUIDValue
@@ -217,7 +217,7 @@ namespace PlayerViewer
             this.panelSearch.Margin = new System.Windows.Forms.Padding(0);
             this.panelSearch.Name = "panelSearch";
             this.panelSearch.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
-            this.panelSearch.Size = new System.Drawing.Size(472, 93);
+            this.panelSearch.Size = new System.Drawing.Size(495, 93);
             this.panelSearch.TabIndex = 7;
             // 
             // btnSearch
@@ -249,7 +249,7 @@ namespace PlayerViewer
             this.txtName.Location = new System.Drawing.Point(0, 0);
             this.txtName.Name = "txtName";
             this.txtName.PlaceholderText = " Name...";
-            this.txtName.Size = new System.Drawing.Size(472, 39);
+            this.txtName.Size = new System.Drawing.Size(495, 39);
             this.txtName.TabIndex = 0;
             // 
             // panelNavBar
@@ -265,7 +265,7 @@ namespace PlayerViewer
             this.panelNavBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.panelNavBar.Location = new System.Drawing.Point(0, 0);
             this.panelNavBar.Name = "panelNavBar";
-            this.panelNavBar.Size = new System.Drawing.Size(861, 40);
+            this.panelNavBar.Size = new System.Drawing.Size(884, 40);
             this.panelNavBar.TabIndex = 3;
             this.panelNavBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TitleBar_MouseDown);
             // 
@@ -303,7 +303,7 @@ namespace PlayerViewer
             this.btnMinimise.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Highlight;
             this.btnMinimise.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(70)))));
             this.btnMinimise.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMinimise.Location = new System.Drawing.Point(711, 0);
+            this.btnMinimise.Location = new System.Drawing.Point(734, 0);
             this.btnMinimise.Margin = new System.Windows.Forms.Padding(0);
             this.btnMinimise.Name = "btnMinimise";
             this.btnMinimise.Padding = new System.Windows.Forms.Padding(3, 0, 0, 2);
@@ -322,7 +322,7 @@ namespace PlayerViewer
             this.btnMaximise.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Highlight;
             this.btnMaximise.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(70)))));
             this.btnMaximise.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMaximise.Location = new System.Drawing.Point(761, 0);
+            this.btnMaximise.Location = new System.Drawing.Point(784, 0);
             this.btnMaximise.Margin = new System.Windows.Forms.Padding(0);
             this.btnMaximise.Name = "btnMaximise";
             this.btnMaximise.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
@@ -341,7 +341,7 @@ namespace PlayerViewer
             this.btnDispose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Crimson;
             this.btnDispose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(70)))));
             this.btnDispose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDispose.Location = new System.Drawing.Point(811, 0);
+            this.btnDispose.Location = new System.Drawing.Point(834, 0);
             this.btnDispose.Margin = new System.Windows.Forms.Padding(0);
             this.btnDispose.Name = "btnDispose";
             this.btnDispose.Padding = new System.Windows.Forms.Padding(3, 3, 0, 0);
@@ -374,13 +374,14 @@ namespace PlayerViewer
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(50)))));
-            this.ClientSize = new System.Drawing.Size(861, 508);
+            this.ClientSize = new System.Drawing.Size(884, 517);
             this.Controls.Add(this.panelMain);
             this.Controls.Add(this.panelNavBar);
             this.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(5);
+            this.MinimumSize = new System.Drawing.Size(860, 420);
             this.Name = "PlayerViewerForm";
             this.Text = "Player Viewer";
             this.Load += new System.EventHandler(this.PlayerViewerForm_Load);

@@ -57,6 +57,7 @@ namespace PlayerViewer
         private async Task Search()
         {
             if (_inCooldown) { return; }
+            if (_currentPlayer != null && _currentPlayer.Name.Equals(txtName.Text, StringComparison.InvariantCultureIgnoreCase)) { return; }
             _inCooldown = true;
 
             try
@@ -74,7 +75,7 @@ namespace PlayerViewer
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Account with name '{txtName.Text}' doesn't exist", "Unknown user", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Account with name '{txtName.Text}' doesn't exist.\nError was: {ex.Message}", "Unknown user", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -256,6 +257,7 @@ namespace PlayerViewer
                 {
                     cp.Style |= 0x20000 | 0x80000 | 0x40000; //WS_MINIMIZEBOX | WS_SYSMENU | WS_SIZEBOX;
                 }
+                cp.ClassStyle |= 0x20000;
                 return cp;
             }
         }
