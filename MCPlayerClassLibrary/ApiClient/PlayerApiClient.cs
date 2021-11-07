@@ -14,6 +14,31 @@ namespace MCPlayerApiClient.ApiClient
     {
         private readonly RestClient _restClient;
         public PlayerApiClient(string apiUri) => _restClient = new RestClient(new Uri(apiUri));
+        public async Task<PlayerDto> GetPlayerFromName(string name)
+        {
+            var response = await _restClient.RequestAsync<PlayerDto>(Method.GET, $"users/profiles/minecraft/{name}");
+
+            if (!response.IsSuccessful)
+            {
+                throw new Exception($"Error retrieving data for '{name}'. Message was: {response.ErrorException?.Message}");
+            }
+
+            PlayerDto player = response.Data;
+            player.Names = await GetAllNameChangesAsync(player.Id.ToString());
+
+            return player;
+        }
+
+        public async Task<string> GetUUIDFromNameAsync(string name)
+        {
+            var response = await _restClient.RequestAsync<PlayerDto>(Method.GET, $"users/profiles/minecraft/{name}");
+
+            if(!response.IsSuccessful)
+            {
+                throw new Exception($"Error retrieving UUID for '{name}'. Message was: {response.ErrorException?.Message}");
+            }
+            return response.Data.Id.ToString();
+        }
 
         public async Task<IEnumerable<string>> GetAllNamesAsync(string uuid)
         {
@@ -48,37 +73,9 @@ namespace MCPlayerApiClient.ApiClient
 
         public async Task<Image> GetBodyImageFromUUIDAsync(string uuid)
         {
-            return await GetImageAsync($"https://mc-heads.net/body/{uuid}");
+            return await GetImageAsync($"https://mc-heads.net/body/{uuid}/1000");
         }
-
-        public async Task<PlayerDto> GetPlayerFromName(string name)
-        {
-            var response = await _restClient.RequestAsync<PlayerDto>(Method.GET, $"users/profiles/minecraft/{name}");
-
-            if (!response.IsSuccessful)
-            {
-                throw new Exception($"Error retrieving data for '{name}'. Message was: {response.ErrorException?.Message}");
-            }
-
-            PlayerDto player = response.Data;
-            player.Names = await GetAllNameChangesAsync(player.Id);
-
-            return player;
-        }
-
-        public async Task<string> GetUUIDFromNameAsync(string name)
-        {
-            var response = await _restClient.RequestAsync<PlayerDto>(Method.GET, $"users/profiles/minecraft/{name}");
-
-            if(!response.IsSuccessful)
-            {
-                throw new Exception($"Error retrieving UUID for '{name}'. Message was: {response.ErrorException?.Message}");
-            }
-            return response.Data.Id;
-        }
-
-
-        private async Task<Image> GetImageAsync(string url)
+        private static async Task<Image> GetImageAsync(string url)
         {
             var taskCompletionSource = new TaskCompletionSource<Image>();
             Image webImage = null;

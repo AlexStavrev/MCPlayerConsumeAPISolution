@@ -40,7 +40,6 @@ namespace MCPlayerApplication
             List<Task> tasks = new()
             {
                 Task.Run(() => LoadPlayerImageAsync(uuid)),
-                //Task.Run(() => LoadPlayerNamesAsync(uuid))
                 Task.Run(() => LoadPlayerNameChangesAsync(uuid))
             };
 
@@ -51,12 +50,6 @@ namespace MCPlayerApplication
         private async Task LoadPlayerImageAsync(string uuid)
         {
             picturePlayerBodyImage.Image = await DataAcccess.GetBodyImageFromUUIDAsync(uuid);
-        }
-
-        private async Task LoadPlayerNamesAsync(string uuid)
-        {
-            listBoxNames.ClearThreadSafe();
-            (await DataAcccess.GetAllNamesAsync(uuid)).Reverse().ToList().ForEach(name => listBoxNames.AddItemThreadSafe(name));
         }
 
         private async Task LoadPlayerNameChangesAsync(string uuid)
