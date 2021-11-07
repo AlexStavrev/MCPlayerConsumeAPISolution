@@ -59,17 +59,27 @@ namespace PlayerViewer
             if (_inCooldown) { return; }
             _inCooldown = true;
 
-            _currentPlayer = await _playerApiClient.GetPlayerFromName(txtName.Text);
-            lblUUIDValue.Text = _currentPlayer.Id.ToString();
-
-            List<Task> tasks = new()
+            try
             {
-                Task.Run(() => LoadPlayerImageAsync(_currentPlayer.Id)),
-                Task.Run(() => LoadPlayerNameChangesAsync(_currentPlayer.Id))
-            };
+                _currentPlayer = await _playerApiClient.GetPlayerFromName(txtName.Text);
+                lblUUIDValue.Text = _currentPlayer.Id.ToString();
 
-            await Task.WhenAll(tasks);
-            _inCooldown = false;
+                List<Task> tasks = new()
+                {
+                    Task.Run(() => LoadPlayerImageAsync(_currentPlayer.Id)),
+                    Task.Run(() => LoadPlayerNameChangesAsync(_currentPlayer.Id))
+                };
+
+                await Task.WhenAll(tasks);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Account with name '{txtName.Text}' doesn't exist", "Unknown user", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                _inCooldown = false;
+            }
         }
 
         private async Task LoadPlayerImageAsync(Guid uuid)
@@ -121,7 +131,7 @@ namespace PlayerViewer
         }
 
         #region Control Events
-            private void btnDispose_Click(object sender, EventArgs e) => Exit();
+        private void btnDispose_Click(object sender, EventArgs e) => Exit();
         private void btnMaximise_Click(object sender, EventArgs e) => Maximise();
         private void btnMinimise_Click(object sender, EventArgs e) => Minimise();
         private async void PlayerViewerForm_Load(object sender, EventArgs e) => await OnLoad();
