@@ -13,8 +13,8 @@ namespace MCPlayerApiClient.DTOs
 
         public override string ToString()
         {
-            string at = (ChangedToAt.Date > DateTime.MinValue) ? $" - {ChangedToAt}" : "";
-            return $"{Name}{at}";
+            string at = (ChangedToAt.Date > DateTime.MinValue) ? $"[{ChangedToAt:dd/MM/yyyy HH:mm}] " : "";
+            return $"{at}{Name}";
         }
     }
 }

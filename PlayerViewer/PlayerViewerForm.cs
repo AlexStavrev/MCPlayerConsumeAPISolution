@@ -3,12 +3,11 @@ using MCPlayerApiClient.DTOs;
 using PlayerViewer.Tools;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -19,10 +18,12 @@ namespace PlayerViewer
         readonly IPlayerApiClient _playerApiClient;
         private bool _inCooldown;
         private Size _formSize;
-        private int _borderSize;
+        private readonly int _borderSize;
+        private PlayerDto _currentPlayer;
 
         public PlayerViewerForm(IPlayerApiClient playerApiClient)
         {
+            CultureInfo.DefaultThreadCurrentCulture = CultureInfo.GetCultureInfo("en-US");
             InitializeComponent();
             _playerApiClient = playerApiClient;
             _borderSize = 2;
@@ -58,13 +59,13 @@ namespace PlayerViewer
             if (_inCooldown) { return; }
             _inCooldown = true;
 
-            PlayerDto player = await _playerApiClient.GetPlayerFromName(txtName.Text);
-            lblUUIDValue.Text = player.Id.ToString();
+            _currentPlayer = await _playerApiClient.GetPlayerFromName(txtName.Text);
+            lblUUIDValue.Text = _currentPlayer.Id.ToString();
 
             List<Task> tasks = new()
             {
-                Task.Run(() => LoadPlayerImageAsync(player.Id)),
-                Task.Run(() => LoadPlayerNameChangesAsync(player.Id))
+                Task.Run(() => LoadPlayerImageAsync(_currentPlayer.Id)),
+                Task.Run(() => LoadPlayerNameChangesAsync(_currentPlayer.Id))
             };
 
             await Task.WhenAll(tasks);
@@ -79,7 +80,7 @@ namespace PlayerViewer
         private async Task LoadPlayerNameChangesAsync(Guid uuid)
         {
             listBoxNames.ClearThreadSafe();
-            (await _playerApiClient.GetAllNameChangesAsync(uuid.ToString())).Reverse().ToList().ForEach(name => listBoxNames.AddItemThreadSafe(name));
+            (await _playerApiClient.GetAllNameChangesAsync(uuid.ToString())).Reverse().ToList().ForEach(nameChange => listBoxNames.AddItemThreadSafe(nameChange));
         }
 
         private async Task OnLoad()
@@ -109,12 +110,23 @@ namespace PlayerViewer
             }
         }
 
+        private void Download()
+        {
+            using WebClient client = new();
+            saveFileSkinDialog.FileName = $"{_currentPlayer.Name}_Skin.png";
+            if (saveFileSkinDialog.ShowDialog() == DialogResult.OK)
+            {
+                client.DownloadFile(new Uri($"https://crafatar.com/skins/{_currentPlayer.Id}"), saveFileSkinDialog.FileName);
+            }
+        }
+
         #region Control Events
-        private void btnDispose_Click(object sender, EventArgs e) => Exit();
+            private void btnDispose_Click(object sender, EventArgs e) => Exit();
         private void btnMaximise_Click(object sender, EventArgs e) => Maximise();
         private void btnMinimise_Click(object sender, EventArgs e) => Minimise();
         private async void PlayerViewerForm_Load(object sender, EventArgs e) => await OnLoad();
         private async void btnSearch_Click(object sender, EventArgs e) => await Search();
+        private void btnDownload_Click(object sender, EventArgs e) => Download();
         private void TitleBar_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)

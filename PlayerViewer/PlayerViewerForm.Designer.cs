@@ -52,6 +52,7 @@ namespace PlayerViewer
             this.btnMaximise = new System.Windows.Forms.Button();
             this.btnDispose = new System.Windows.Forms.Button();
             this.tooltipDownload = new System.Windows.Forms.ToolTip(this.components);
+            this.saveFileSkinDialog = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.imagePlayerSkin)).BeginInit();
             this.panelPicture.SuspendLayout();
             this.panelMain.SuspendLayout();
@@ -109,6 +110,7 @@ namespace PlayerViewer
             this.btnDownload.TabStop = false;
             this.btnDownload.Text = "⇩";
             this.btnDownload.UseVisualStyleBackColor = false;
+            this.btnDownload.Click += new System.EventHandler(this.btnDownload_Click);
             // 
             // panelMain
             // 
@@ -160,6 +162,7 @@ namespace PlayerViewer
             // 
             this.listBoxNames.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(65)))));
             this.listBoxNames.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.listBoxNames.ColumnWidth = 100;
             this.listBoxNames.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBoxNames.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.listBoxNames.FormattingEnabled = true;
@@ -335,7 +338,7 @@ namespace PlayerViewer
             this.btnDispose.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnDispose.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(50)))));
             this.btnDispose.FlatAppearance.BorderSize = 0;
-            this.btnDispose.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Highlight;
+            this.btnDispose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Crimson;
             this.btnDispose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(70)))));
             this.btnDispose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDispose.Location = new System.Drawing.Point(811, 0);
@@ -356,6 +359,14 @@ namespace PlayerViewer
             this.tooltipDownload.OwnerDraw = true;
             this.tooltipDownload.ToolTipTitle = "Download";
             this.tooltipDownload.Draw += new System.Windows.Forms.DrawToolTipEventHandler(this.tooltipDownload_Draw);
+            // 
+            // saveFileSkinDialog
+            // 
+            this.saveFileSkinDialog.DefaultExt = "png";
+            this.saveFileSkinDialog.Filter = "\"Player Skins|*.png\"";
+            this.saveFileSkinDialog.RestoreDirectory = true;
+            this.saveFileSkinDialog.SupportMultiDottedExtensions = true;
+            this.saveFileSkinDialog.Title = "Save Skin";
             // 
             // PlayerViewerForm
             // 
@@ -414,6 +425,7 @@ namespace PlayerViewer
         private System.Windows.Forms.Panel panelNames;
         private System.Windows.Forms.Button btnDownload;
         private System.Windows.Forms.ToolTip tooltipDownload;
+        private System.Windows.Forms.SaveFileDialog saveFileSkinDialog;
     }
 }
 
