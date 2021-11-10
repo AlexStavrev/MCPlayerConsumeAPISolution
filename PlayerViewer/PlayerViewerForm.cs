@@ -57,6 +57,7 @@ namespace PlayerViewer
         private async Task Search()
         {
             if (_inCooldown) { return; }
+            if (txtName.Text == "") { return; }
             if (_currentPlayer != null && _currentPlayer.Name.Equals(txtName.Text, StringComparison.InvariantCultureIgnoreCase)) { return; }
             _inCooldown = true;
 
@@ -123,6 +124,11 @@ namespace PlayerViewer
 
         private void Download()
         {
+            if (_currentPlayer == null)
+            {
+                tooltipDownload.Show("Select a player first", btnDownload);
+                return;
+            }
             using WebClient client = new();
             saveFileSkinDialog.FileName = $"{_currentPlayer.Name}_Skin.png";
             if (saveFileSkinDialog.ShowDialog() == DialogResult.OK)

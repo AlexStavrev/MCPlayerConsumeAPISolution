@@ -39,6 +39,7 @@ namespace PlayerViewer
             this.panelPlayerInfo = new System.Windows.Forms.Panel();
             this.panelNames = new System.Windows.Forms.Panel();
             this.listBoxNames = new System.Windows.Forms.ListBox();
+            this.lblNames = new System.Windows.Forms.Label();
             this.panelInformation = new System.Windows.Forms.Panel();
             this.lblUUIDValue = new System.Windows.Forms.Label();
             this.lblUUIDTitle = new System.Windows.Forms.Label();
@@ -151,6 +152,7 @@ namespace PlayerViewer
             // panelNames
             // 
             this.panelNames.Controls.Add(this.listBoxNames);
+            this.panelNames.Controls.Add(this.lblNames);
             this.panelNames.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelNames.Location = new System.Drawing.Point(20, 219);
             this.panelNames.Name = "panelNames";
@@ -167,11 +169,23 @@ namespace PlayerViewer
             this.listBoxNames.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.listBoxNames.FormattingEnabled = true;
             this.listBoxNames.ItemHeight = 31;
-            this.listBoxNames.Location = new System.Drawing.Point(0, 10);
+            this.listBoxNames.Location = new System.Drawing.Point(0, 42);
             this.listBoxNames.Name = "listBoxNames";
-            this.listBoxNames.Size = new System.Drawing.Size(495, 188);
+            this.listBoxNames.Size = new System.Drawing.Size(495, 156);
             this.listBoxNames.TabIndex = 1;
             this.listBoxNames.TabStop = false;
+            // 
+            // lblNames
+            // 
+            this.lblNames.AutoSize = true;
+            this.lblNames.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblNames.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblNames.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.lblNames.Location = new System.Drawing.Point(0, 10);
+            this.lblNames.Name = "lblNames";
+            this.lblNames.Size = new System.Drawing.Size(92, 32);
+            this.lblNames.TabIndex = 6;
+            this.lblNames.Text = "Names";
             // 
             // panelInformation
             // 
@@ -392,6 +406,7 @@ namespace PlayerViewer
             this.panelRight.ResumeLayout(false);
             this.panelPlayerInfo.ResumeLayout(false);
             this.panelNames.ResumeLayout(false);
+            this.panelNames.PerformLayout();
             this.panelInformation.ResumeLayout(false);
             this.panelInformation.PerformLayout();
             this.panelSearch.ResumeLayout(false);
@@ -427,6 +442,7 @@ namespace PlayerViewer
         private System.Windows.Forms.Button btnDownload;
         private System.Windows.Forms.ToolTip tooltipDownload;
         private System.Windows.Forms.SaveFileDialog saveFileSkinDialog;
+        private System.Windows.Forms.Label lblNames;
     }
 }
 
