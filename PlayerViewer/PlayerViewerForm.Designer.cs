@@ -54,6 +54,7 @@ namespace PlayerViewer
             this.btnDispose = new System.Windows.Forms.Button();
             this.tooltipDownload = new System.Windows.Forms.ToolTip(this.components);
             this.saveFileSkinDialog = new System.Windows.Forms.SaveFileDialog();
+            this.notificationLabelBar = new PlayerViewer.CustomControls.NotificationLabelBar();
             ((System.ComponentModel.ISupportInitialize)(this.imagePlayerSkin)).BeginInit();
             this.panelPicture.SuspendLayout();
             this.panelMain.SuspendLayout();
@@ -168,10 +169,10 @@ namespace PlayerViewer
             this.listBoxNames.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBoxNames.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.listBoxNames.FormattingEnabled = true;
-            this.listBoxNames.ItemHeight = 31;
-            this.listBoxNames.Location = new System.Drawing.Point(0, 42);
+            this.listBoxNames.ItemHeight = 25;
+            this.listBoxNames.Location = new System.Drawing.Point(0, 35);
             this.listBoxNames.Name = "listBoxNames";
-            this.listBoxNames.Size = new System.Drawing.Size(495, 156);
+            this.listBoxNames.Size = new System.Drawing.Size(495, 163);
             this.listBoxNames.TabIndex = 1;
             this.listBoxNames.TabStop = false;
             // 
@@ -183,7 +184,7 @@ namespace PlayerViewer
             this.lblNames.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.lblNames.Location = new System.Drawing.Point(0, 10);
             this.lblNames.Name = "lblNames";
-            this.lblNames.Size = new System.Drawing.Size(92, 32);
+            this.lblNames.Size = new System.Drawing.Size(72, 25);
             this.lblNames.TabIndex = 6;
             this.lblNames.Text = "Names";
             // 
@@ -204,9 +205,9 @@ namespace PlayerViewer
             this.lblUUIDValue.AutoSize = true;
             this.lblUUIDValue.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblUUIDValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.lblUUIDValue.Location = new System.Drawing.Point(0, 42);
+            this.lblUUIDValue.Location = new System.Drawing.Point(0, 35);
             this.lblUUIDValue.Name = "lblUUIDValue";
-            this.lblUUIDValue.Size = new System.Drawing.Size(470, 32);
+            this.lblUUIDValue.Size = new System.Drawing.Size(364, 25);
             this.lblUUIDValue.TabIndex = 4;
             this.lblUUIDValue.Text = "00000000-0000-0000-0000-000000000000";
             // 
@@ -218,7 +219,7 @@ namespace PlayerViewer
             this.lblUUIDTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.lblUUIDTitle.Location = new System.Drawing.Point(0, 10);
             this.lblUUIDTitle.Name = "lblUUIDTitle";
-            this.lblUUIDTitle.Size = new System.Drawing.Size(74, 32);
+            this.lblUUIDTitle.Size = new System.Drawing.Size(60, 25);
             this.lblUUIDTitle.TabIndex = 5;
             this.lblUUIDTitle.Text = "UUID";
             // 
@@ -263,7 +264,7 @@ namespace PlayerViewer
             this.txtName.Location = new System.Drawing.Point(0, 0);
             this.txtName.Name = "txtName";
             this.txtName.PlaceholderText = " Name...";
-            this.txtName.Size = new System.Drawing.Size(495, 39);
+            this.txtName.Size = new System.Drawing.Size(495, 32);
             this.txtName.TabIndex = 0;
             // 
             // panelNavBar
@@ -289,7 +290,7 @@ namespace PlayerViewer
             this.lblTitle.Location = new System.Drawing.Point(39, 8);
             this.lblTitle.Margin = new System.Windows.Forms.Padding(20);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(53, 25);
+            this.lblTitle.Size = new System.Drawing.Size(41, 20);
             this.lblTitle.TabIndex = 3;
             this.lblTitle.Text = "Title";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -382,13 +383,29 @@ namespace PlayerViewer
             this.saveFileSkinDialog.SupportMultiDottedExtensions = true;
             this.saveFileSkinDialog.Title = "Save Skin";
             // 
+            // notificationLabelBar
+            // 
+            this.notificationLabelBar.BackColor = System.Drawing.Color.IndianRed;
+            this.notificationLabelBar.ButtonColor = System.Drawing.Color.Maroon;
+            this.notificationLabelBar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.notificationLabelBar.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.notificationLabelBar.ForeColor = System.Drawing.Color.White;
+            this.notificationLabelBar.Location = new System.Drawing.Point(0, 40);
+            this.notificationLabelBar.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.notificationLabelBar.Name = "notificationLabelBar";
+            this.notificationLabelBar.Size = new System.Drawing.Size(884, 35);
+            this.notificationLabelBar.TabIndex = 4;
+            this.notificationLabelBar.Text = "Such account does not exist.";
+            this.notificationLabelBar.Visible = false;
+            // 
             // PlayerViewerForm
             // 
             this.AcceptButton = this.btnSearch;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 31F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(50)))));
             this.ClientSize = new System.Drawing.Size(884, 517);
+            this.Controls.Add(this.notificationLabelBar);
             this.Controls.Add(this.panelMain);
             this.Controls.Add(this.panelNavBar);
             this.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -443,6 +460,7 @@ namespace PlayerViewer
         private System.Windows.Forms.ToolTip tooltipDownload;
         private System.Windows.Forms.SaveFileDialog saveFileSkinDialog;
         private System.Windows.Forms.Label lblNames;
+        private CustomControls.NotificationLabelBar notificationLabelBar;
     }
 }
 

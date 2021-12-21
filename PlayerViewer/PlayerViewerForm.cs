@@ -63,7 +63,7 @@ namespace PlayerViewer
 
             try
             {
-                _currentPlayer = await _playerApiClient.GetPlayerFromName(txtName.Text);
+                _currentPlayer = await _playerApiClient.GetPlayerByName(txtName.Text);
                 lblUUIDValue.Text = _currentPlayer.Id.ToString();
 
                 List<Task> tasks = new()
@@ -76,7 +76,8 @@ namespace PlayerViewer
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Account with name '{txtName.Text}' doesn't exist.\nError was: {ex.Message}", "Unknown user", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _ = notificationLabelBar.ShowNotificationAsync(2000).ConfigureAwait(false);
+                //MessageBox.Show($"Account with name '{txtName.Text}' doesn't exist.\nError was: {ex.Message}", "Unknown user", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {

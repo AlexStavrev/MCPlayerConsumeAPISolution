@@ -14,7 +14,8 @@ namespace MCPlayerApiClient.ApiClient
     {
         private readonly RestClient _restClient;
         public PlayerApiClient(string apiUri) => _restClient = new RestClient(new Uri(apiUri));
-        public async Task<PlayerDto> GetPlayerFromName(string name)
+
+        public async Task<PlayerDto> GetPlayerByName(string name)
         {
             var response = await _restClient.RequestAsync<PlayerDto>(Method.GET, $"users/profiles/minecraft/{name}");
 
@@ -24,7 +25,9 @@ namespace MCPlayerApiClient.ApiClient
             }
 
             PlayerDto player = response.Data;
-            player.Names = await GetAllNameChangesAsync(player.Id.ToString());
+            if (player != null) {
+                player.Names = await GetAllNameChangesAsync(player.Id.ToString());
+            }
 
             return player;
         }
