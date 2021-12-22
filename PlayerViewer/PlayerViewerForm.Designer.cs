@@ -103,7 +103,7 @@ namespace PlayerViewer
             this.btnDownload.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Highlight;
             this.btnDownload.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(30)))));
             this.btnDownload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDownload.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnDownload.Font = new System.Drawing.Font("Segoe UI Symbol", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnDownload.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
             this.btnDownload.Location = new System.Drawing.Point(10, 377);
             this.btnDownload.Margin = new System.Windows.Forms.Padding(0);
@@ -263,7 +263,6 @@ namespace PlayerViewer
             this.btnSearch.TabIndex = 1;
             this.btnSearch.TabStop = false;
             this.btnSearch.Text = "Search";
-            this.btnSearch.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnSearch.UseVisualStyleBackColor = false;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
@@ -312,11 +311,11 @@ namespace PlayerViewer
             // 
             // lblTitle
             // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Location = new System.Drawing.Point(39, 8);
+            this.lblTitle.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblTitle.Location = new System.Drawing.Point(41, 0);
             this.lblTitle.Margin = new System.Windows.Forms.Padding(20);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(41, 20);
+            this.lblTitle.Size = new System.Drawing.Size(268, 40);
             this.lblTitle.TabIndex = 3;
             this.lblTitle.Text = "Title";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -422,7 +421,7 @@ namespace PlayerViewer
             this.Controls.Add(this.notificationLblBar);
             this.Controls.Add(this.panelMain);
             this.Controls.Add(this.panelNavBar);
-            this.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Font = new System.Drawing.Font("Segoe UI Symbol", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(5);
@@ -443,7 +442,6 @@ namespace PlayerViewer
             this.panelSearch.ResumeLayout(false);
             this.panelSearch.PerformLayout();
             this.panelNavBar.ResumeLayout(false);
-            this.panelNavBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imageAppIcon)).EndInit();
             this.ResumeLayout(false);
 
