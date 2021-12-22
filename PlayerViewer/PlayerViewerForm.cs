@@ -4,6 +4,7 @@ using PlayerViewer.Tools;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Globalization;
 using System.Linq;
 using System.Net;
@@ -20,6 +21,8 @@ namespace PlayerViewer
         private Size _formSize;
         private readonly int _borderSize;
         private PlayerDto _currentPlayer;
+
+        private static List<PrivateFontCollection> _fontCollections;
 
         public PlayerViewerForm(IPlayerApiClient playerApiClient)
         {
@@ -65,6 +68,7 @@ namespace PlayerViewer
             {
                 _currentPlayer = await _playerApiClient.GetPlayerByName(txtName.Text);
                 lblUUIDValue.Text = _currentPlayer.Id.ToString();
+                lblNametag.Text = _currentPlayer.Name;
 
                 List<Task> tasks = new()
                 {
@@ -76,7 +80,7 @@ namespace PlayerViewer
             }
             catch (Exception ex)
             {
-                _ = notificationLabelBar.ShowNotificationAsync(2000).ConfigureAwait(false);
+                _ = notificationLblBar.ShowNotificationAsync(2000).ConfigureAwait(false);
                 //MessageBox.Show($"Account with name '{txtName.Text}' doesn't exist.\nError was: {ex.Message}", "Unknown user", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
@@ -103,6 +107,25 @@ namespace PlayerViewer
             MaximizedBounds = Screen.FromHandle(Handle).WorkingArea;
             tooltipDownload.SetToolTip(btnDownload, "Download skin");
             await LoadPlayerImageAsync(Guid.Parse("00000000-0000-0000-0000-000000000000"));
+
+            LoadMinecraftFont();
+        }
+
+        private void LoadMinecraftFont()
+        {
+            lblNametag.Font = GetCustomFont(Properties.Resources.minecraft, 12.5f, FontStyle.Regular);
+        }
+
+        private static Font GetCustomFont(byte[] fontData, float size, FontStyle style)
+        {
+            if (_fontCollections == null) _fontCollections = new List<PrivateFontCollection>();
+            PrivateFontCollection fontCol = new();
+            IntPtr fontPtr = Marshal.AllocCoTaskMem(fontData.Length);
+            Marshal.Copy(fontData, 0, fontPtr, fontData.Length);
+            fontCol.AddMemoryFont(fontPtr, fontData.Length);
+            Marshal.FreeCoTaskMem(fontPtr);
+            _fontCollections.Add(fontCol);
+            return new Font(fontCol.Families[0], size, style);
         }
 
         private void AdjustForm()

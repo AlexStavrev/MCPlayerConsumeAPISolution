@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <ApplicationIcon>exeIcon.ico</ApplicationIcon>
   </PropertyGroup>
@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MCPlayerClassLibrary\MCPlayerApiClient.csproj" />
+    <ProjectReference Include="..\UIAnimations\UIAnimations.csproj" />
   </ItemGroup>
 
   <ItemGroup>

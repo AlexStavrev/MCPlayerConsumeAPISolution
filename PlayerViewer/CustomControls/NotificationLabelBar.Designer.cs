@@ -66,6 +66,7 @@
             this.Controls.Add(this.lblMessage);
             this.Name = "NotificationLabelBar";
             this.Size = new System.Drawing.Size(675, 28);
+            this.Load += new System.EventHandler(this.NotificationLabelBar_Load);
             this.ResumeLayout(false);
 
         }

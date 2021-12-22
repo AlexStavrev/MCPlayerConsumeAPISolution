@@ -14,7 +14,7 @@ namespace PlayerViewer
         {
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            Application.SetCompatibleTextRenderingDefault(true);
             IPlayerApiClient playerApiClient = new PlayerApiClient("https://api.mojang.com/");
             Application.Run(new PlayerViewerForm(playerApiClient));
         }

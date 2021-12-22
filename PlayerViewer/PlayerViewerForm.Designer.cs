@@ -34,6 +34,7 @@ namespace PlayerViewer
             this.imagePlayerSkin = new System.Windows.Forms.PictureBox();
             this.panelPicture = new System.Windows.Forms.Panel();
             this.btnDownload = new System.Windows.Forms.Button();
+            this.lblNametag = new System.Windows.Forms.Label();
             this.panelMain = new System.Windows.Forms.Panel();
             this.panelRight = new System.Windows.Forms.Panel();
             this.panelPlayerInfo = new System.Windows.Forms.Panel();
@@ -46,6 +47,7 @@ namespace PlayerViewer
             this.panelSearch = new System.Windows.Forms.Panel();
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtName = new System.Windows.Forms.TextBox();
+            this.notificationLblBar = new PlayerViewer.CustomControls.NotificationLabelBar();
             this.panelNavBar = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
             this.imageAppIcon = new System.Windows.Forms.PictureBox();
@@ -54,7 +56,6 @@ namespace PlayerViewer
             this.btnDispose = new System.Windows.Forms.Button();
             this.tooltipDownload = new System.Windows.Forms.ToolTip(this.components);
             this.saveFileSkinDialog = new System.Windows.Forms.SaveFileDialog();
-            this.notificationLabelBar = new PlayerViewer.CustomControls.NotificationLabelBar();
             ((System.ComponentModel.ISupportInitialize)(this.imagePlayerSkin)).BeginInit();
             this.panelPicture.SuspendLayout();
             this.panelMain.SuspendLayout();
@@ -70,11 +71,11 @@ namespace PlayerViewer
             // imagePlayerSkin
             // 
             this.imagePlayerSkin.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.imagePlayerSkin.Location = new System.Drawing.Point(10, 20);
+            this.imagePlayerSkin.Location = new System.Drawing.Point(10, 45);
             this.imagePlayerSkin.Margin = new System.Windows.Forms.Padding(10, 20, 10, 20);
             this.imagePlayerSkin.Name = "imagePlayerSkin";
             this.imagePlayerSkin.Padding = new System.Windows.Forms.Padding(10, 20, 10, 20);
-            this.imagePlayerSkin.Size = new System.Drawing.Size(269, 397);
+            this.imagePlayerSkin.Size = new System.Drawing.Size(269, 372);
             this.imagePlayerSkin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.imagePlayerSkin.TabIndex = 0;
             this.imagePlayerSkin.TabStop = false;
@@ -84,6 +85,7 @@ namespace PlayerViewer
             this.panelPicture.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(50)))));
             this.panelPicture.Controls.Add(this.btnDownload);
             this.panelPicture.Controls.Add(this.imagePlayerSkin);
+            this.panelPicture.Controls.Add(this.lblNametag);
             this.panelPicture.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelPicture.Location = new System.Drawing.Point(20, 20);
             this.panelPicture.Margin = new System.Windows.Forms.Padding(10, 20, 10, 20);
@@ -113,6 +115,16 @@ namespace PlayerViewer
             this.btnDownload.Text = "⇩";
             this.btnDownload.UseVisualStyleBackColor = false;
             this.btnDownload.Click += new System.EventHandler(this.btnDownload_Click);
+            // 
+            // lblNametag
+            // 
+            this.lblNametag.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblNametag.ForeColor = System.Drawing.Color.White;
+            this.lblNametag.Location = new System.Drawing.Point(10, 20);
+            this.lblNametag.Name = "lblNametag";
+            this.lblNametag.Size = new System.Drawing.Size(269, 25);
+            this.lblNametag.TabIndex = 2;
+            this.lblNametag.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // panelMain
             // 
@@ -267,6 +279,20 @@ namespace PlayerViewer
             this.txtName.Size = new System.Drawing.Size(495, 32);
             this.txtName.TabIndex = 0;
             // 
+            // notificationLblBar
+            // 
+            this.notificationLblBar.BackColor = System.Drawing.Color.IndianRed;
+            this.notificationLblBar.ButtonColor = System.Drawing.Color.Maroon;
+            this.notificationLblBar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.notificationLblBar.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.notificationLblBar.ForeColor = System.Drawing.Color.White;
+            this.notificationLblBar.Location = new System.Drawing.Point(0, 40);
+            this.notificationLblBar.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.notificationLblBar.Name = "notificationLblBar";
+            this.notificationLblBar.Size = new System.Drawing.Size(884, 0);
+            this.notificationLblBar.TabIndex = 4;
+            this.notificationLblBar.Text = "Such account does not exist";
+            // 
             // panelNavBar
             // 
             this.panelNavBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(50)))));
@@ -318,6 +344,7 @@ namespace PlayerViewer
             this.btnMinimise.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Highlight;
             this.btnMinimise.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(70)))));
             this.btnMinimise.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMinimise.Font = new System.Drawing.Font("Segoe UI Symbol", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnMinimise.Location = new System.Drawing.Point(734, 0);
             this.btnMinimise.Margin = new System.Windows.Forms.Padding(0);
             this.btnMinimise.Name = "btnMinimise";
@@ -337,6 +364,7 @@ namespace PlayerViewer
             this.btnMaximise.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Highlight;
             this.btnMaximise.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(70)))));
             this.btnMaximise.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMaximise.Font = new System.Drawing.Font("Segoe UI Symbol", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnMaximise.Location = new System.Drawing.Point(784, 0);
             this.btnMaximise.Margin = new System.Windows.Forms.Padding(0);
             this.btnMaximise.Name = "btnMaximise";
@@ -356,6 +384,7 @@ namespace PlayerViewer
             this.btnDispose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Crimson;
             this.btnDispose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(65)))), ((int)(((byte)(70)))));
             this.btnDispose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDispose.Font = new System.Drawing.Font("Segoe UI Symbol", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnDispose.Location = new System.Drawing.Point(834, 0);
             this.btnDispose.Margin = new System.Windows.Forms.Padding(0);
             this.btnDispose.Name = "btnDispose";
@@ -383,21 +412,6 @@ namespace PlayerViewer
             this.saveFileSkinDialog.SupportMultiDottedExtensions = true;
             this.saveFileSkinDialog.Title = "Save Skin";
             // 
-            // notificationLabelBar
-            // 
-            this.notificationLabelBar.BackColor = System.Drawing.Color.IndianRed;
-            this.notificationLabelBar.ButtonColor = System.Drawing.Color.Maroon;
-            this.notificationLabelBar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.notificationLabelBar.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.notificationLabelBar.ForeColor = System.Drawing.Color.White;
-            this.notificationLabelBar.Location = new System.Drawing.Point(0, 40);
-            this.notificationLabelBar.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
-            this.notificationLabelBar.Name = "notificationLabelBar";
-            this.notificationLabelBar.Size = new System.Drawing.Size(884, 35);
-            this.notificationLabelBar.TabIndex = 4;
-            this.notificationLabelBar.Text = "Such account does not exist.";
-            this.notificationLabelBar.Visible = false;
-            // 
             // PlayerViewerForm
             // 
             this.AcceptButton = this.btnSearch;
@@ -405,7 +419,7 @@ namespace PlayerViewer
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(50)))));
             this.ClientSize = new System.Drawing.Size(884, 517);
-            this.Controls.Add(this.notificationLabelBar);
+            this.Controls.Add(this.notificationLblBar);
             this.Controls.Add(this.panelMain);
             this.Controls.Add(this.panelNavBar);
             this.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -460,7 +474,8 @@ namespace PlayerViewer
         private System.Windows.Forms.ToolTip tooltipDownload;
         private System.Windows.Forms.SaveFileDialog saveFileSkinDialog;
         private System.Windows.Forms.Label lblNames;
-        private CustomControls.NotificationLabelBar notificationLabelBar;
+        private CustomControls.NotificationLabelBar notificationLblBar;
+        private System.Windows.Forms.Label lblNametag;
     }
 }
 
