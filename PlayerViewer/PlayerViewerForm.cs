@@ -32,6 +32,18 @@ namespace PlayerViewer
             _borderSize = 2;
         }
 
+        private async Task Clear()
+        {
+            if (_currentPlayer != null)
+            {
+                _currentPlayer = null;
+                lblNametag.Text = string.Empty;
+                txtName.Text = string.Empty;
+                listBoxNames.ClearThreadSafe();
+                await LoadPlayerImageAsync(Guid.Parse("00000000-0000-0000-0000-000000000000"));
+            }
+        }
+
         private void Exit()
         {
             Application.Exit();
@@ -67,7 +79,6 @@ namespace PlayerViewer
             try
             {
                 _currentPlayer = await _playerApiClient.GetPlayerByName(txtName.Text);
-                lblUUIDValue.Text = _currentPlayer.Id.ToString();
                 lblNametag.Text = _currentPlayer.Name;
 
                 List<Task> tasks = new()
@@ -91,6 +102,7 @@ namespace PlayerViewer
 
         private async Task LoadPlayerImageAsync(Guid uuid)
         {
+            lblUUIDValue.Text = uuid.ToString();
             imagePlayerSkin.Image = await _playerApiClient.GetBodyImageFromUUIDAsync(uuid.ToString());
         }
 
@@ -168,6 +180,7 @@ namespace PlayerViewer
         private async void PlayerViewerForm_Load(object sender, EventArgs e) => await OnLoad();
         private async void btnSearch_Click(object sender, EventArgs e) => await Search();
         private void btnDownload_Click(object sender, EventArgs e) => Download();
+        private async void btnClear_Click(object sender, EventArgs e) => await Clear();
         private void TitleBar_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)

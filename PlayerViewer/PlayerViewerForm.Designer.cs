@@ -45,6 +45,7 @@ namespace PlayerViewer
             this.lblUUIDValue = new System.Windows.Forms.Label();
             this.lblUUIDTitle = new System.Windows.Forms.Label();
             this.panelSearch = new System.Windows.Forms.Panel();
+            this.btnClear = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtName = new System.Windows.Forms.TextBox();
             this.notificationLblBar = new PlayerViewer.CustomControls.NotificationLabelBar();
@@ -105,11 +106,11 @@ namespace PlayerViewer
             this.btnDownload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDownload.Font = new System.Drawing.Font("Segoe UI Symbol", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnDownload.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.btnDownload.Location = new System.Drawing.Point(10, 377);
+            this.btnDownload.Location = new System.Drawing.Point(10, 382);
             this.btnDownload.Margin = new System.Windows.Forms.Padding(0);
             this.btnDownload.Name = "btnDownload";
             this.btnDownload.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
-            this.btnDownload.Size = new System.Drawing.Size(269, 40);
+            this.btnDownload.Size = new System.Drawing.Size(269, 35);
             this.btnDownload.TabIndex = 1;
             this.btnDownload.TabStop = false;
             this.btnDownload.Text = "⇩";
@@ -237,6 +238,7 @@ namespace PlayerViewer
             // 
             // panelSearch
             // 
+            this.panelSearch.Controls.Add(this.btnClear);
             this.panelSearch.Controls.Add(this.btnSearch);
             this.panelSearch.Controls.Add(this.txtName);
             this.panelSearch.Dock = System.Windows.Forms.DockStyle.Top;
@@ -246,6 +248,29 @@ namespace PlayerViewer
             this.panelSearch.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
             this.panelSearch.Size = new System.Drawing.Size(495, 93);
             this.panelSearch.TabIndex = 7;
+            // 
+            // btnClear
+            // 
+            this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(37)))));
+            this.btnClear.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(37)))));
+            this.btnClear.FlatAppearance.BorderSize = 0;
+            this.btnClear.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Highlight;
+            this.btnClear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(30)))));
+            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClear.Font = new System.Drawing.Font("Segoe UI Symbol", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnClear.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.btnClear.Location = new System.Drawing.Point(456, 44);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(0);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.btnClear.Size = new System.Drawing.Size(34, 34);
+            this.btnClear.TabIndex = 2;
+            this.btnClear.TabStop = false;
+            this.btnClear.Text = "⟲";
+            this.tooltipDownload.SetToolTip(this.btnClear, "Clear Selected account");
+            this.btnClear.UseVisualStyleBackColor = false;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnSearch
             // 
@@ -474,6 +499,7 @@ namespace PlayerViewer
         private System.Windows.Forms.Label lblNames;
         private CustomControls.NotificationLabelBar notificationLblBar;
         private System.Windows.Forms.Label lblNametag;
+        private System.Windows.Forms.Button btnClear;
     }
 }
 
