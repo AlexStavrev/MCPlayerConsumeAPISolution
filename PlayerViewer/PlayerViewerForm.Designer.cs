@@ -57,6 +57,7 @@ namespace PlayerViewer
             this.btnDispose = new System.Windows.Forms.Button();
             this.tooltipDownload = new System.Windows.Forms.ToolTip(this.components);
             this.saveFileSkinDialog = new System.Windows.Forms.SaveFileDialog();
+            this.warningLblBar = new PlayerViewer.CustomControls.NotificationLabelBar();
             ((System.ComponentModel.ISupportInitialize)(this.imagePlayerSkin)).BeginInit();
             this.panelPicture.SuspendLayout();
             this.panelMain.SuspendLayout();
@@ -72,14 +73,15 @@ namespace PlayerViewer
             // imagePlayerSkin
             // 
             this.imagePlayerSkin.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.imagePlayerSkin.Location = new System.Drawing.Point(10, 45);
+            this.imagePlayerSkin.Location = new System.Drawing.Point(10, 72);
             this.imagePlayerSkin.Margin = new System.Windows.Forms.Padding(10, 20, 10, 20);
             this.imagePlayerSkin.Name = "imagePlayerSkin";
             this.imagePlayerSkin.Padding = new System.Windows.Forms.Padding(10, 20, 10, 20);
-            this.imagePlayerSkin.Size = new System.Drawing.Size(269, 372);
+            this.imagePlayerSkin.Size = new System.Drawing.Size(269, 345);
             this.imagePlayerSkin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.imagePlayerSkin.TabIndex = 0;
             this.imagePlayerSkin.TabStop = false;
+            this.imagePlayerSkin.Resize += new System.EventHandler(this.imagePlayerSkin_Resize);
             // 
             // panelPicture
             // 
@@ -123,7 +125,7 @@ namespace PlayerViewer
             this.lblNametag.ForeColor = System.Drawing.Color.White;
             this.lblNametag.Location = new System.Drawing.Point(10, 20);
             this.lblNametag.Name = "lblNametag";
-            this.lblNametag.Size = new System.Drawing.Size(269, 25);
+            this.lblNametag.Size = new System.Drawing.Size(269, 52);
             this.lblNametag.TabIndex = 2;
             this.lblNametag.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
@@ -436,6 +438,20 @@ namespace PlayerViewer
             this.saveFileSkinDialog.SupportMultiDottedExtensions = true;
             this.saveFileSkinDialog.Title = "Save Skin";
             // 
+            // warningLblBar
+            // 
+            this.warningLblBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(213)))), ((int)(((byte)(154)))));
+            this.warningLblBar.ButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(100)))), ((int)(((byte)(7)))));
+            this.warningLblBar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.warningLblBar.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.warningLblBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(100)))), ((int)(((byte)(7)))));
+            this.warningLblBar.Location = new System.Drawing.Point(0, 40);
+            this.warningLblBar.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.warningLblBar.Name = "warningLblBar";
+            this.warningLblBar.Size = new System.Drawing.Size(884, 0);
+            this.warningLblBar.TabIndex = 5;
+            this.warningLblBar.Text = "Input a player username";
+            // 
             // PlayerViewerForm
             // 
             this.AcceptButton = this.btnSearch;
@@ -443,6 +459,7 @@ namespace PlayerViewer
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(50)))));
             this.ClientSize = new System.Drawing.Size(884, 517);
+            this.Controls.Add(this.warningLblBar);
             this.Controls.Add(this.notificationLblBar);
             this.Controls.Add(this.panelMain);
             this.Controls.Add(this.panelNavBar);
@@ -500,6 +517,7 @@ namespace PlayerViewer
         private CustomControls.NotificationLabelBar notificationLblBar;
         private System.Windows.Forms.Label lblNametag;
         private System.Windows.Forms.Button btnClear;
+        private CustomControls.NotificationLabelBar warningLblBar;
     }
 }
 

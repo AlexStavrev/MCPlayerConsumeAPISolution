@@ -72,22 +72,34 @@ namespace PlayerViewer
         private async Task Search()
         {
             if (_inCooldown) { return; }
-            if (txtName.Text == "") { return; }
+            if (txtName.Text == "")
+            {
+                _ = warningLblBar.ShowNotificationAsync(2000).ConfigureAwait(false);
+                return; 
+            }
             if (_currentPlayer != null && _currentPlayer.Name.Equals(txtName.Text, StringComparison.InvariantCultureIgnoreCase)) { return; }
             _inCooldown = true;
 
             try
             {
-                _currentPlayer = await _playerApiClient.GetPlayerByName(txtName.Text);
-                lblNametag.Text = _currentPlayer.Name;
-
-                List<Task> tasks = new()
+                var result = await _playerApiClient.GetPlayerByName(txtName.Text);
+                if(result != null)
                 {
-                    Task.Run(() => LoadPlayerImageAsync(_currentPlayer.Id)),
-                    Task.Run(() => LoadPlayerNameChangesAsync(_currentPlayer.Id))
-                };
+                    _currentPlayer = result;
+                    lblNametag.Text = _currentPlayer.Name;
 
-                await Task.WhenAll(tasks);
+                    List<Task> tasks = new()
+                    {
+                        Task.Run(() => LoadPlayerImageAsync(_currentPlayer.Id)),
+                        Task.Run(() => LoadPlayerNameChangesAsync(_currentPlayer.Id))
+                    };
+
+                    await Task.WhenAll(tasks);
+                }
+                else
+                {
+                    _ = notificationLblBar.ShowNotificationAsync(2000).ConfigureAwait(false);
+                }
             }
             catch (Exception ex)
             {
@@ -120,12 +132,7 @@ namespace PlayerViewer
             tooltipDownload.SetToolTip(btnDownload, "Download skin");
             await LoadPlayerImageAsync(Guid.Parse("00000000-0000-0000-0000-000000000000"));
 
-            LoadMinecraftFont();
-        }
-
-        private void LoadMinecraftFont()
-        {
-            lblNametag.Font = GetCustomFont(Properties.Resources.minecraft, 12.5f, FontStyle.Regular);
+            AdjustNametagSize();
         }
 
         private static Font GetCustomFont(byte[] fontData, float size, FontStyle style)
@@ -158,6 +165,11 @@ namespace PlayerViewer
             }
         }
 
+        private void AdjustNametagSize()
+        {
+            lblNametag.Font = GetCustomFont(Properties.Resources.minecraft, Math.Min(imagePlayerSkin.Height / 20, 31), FontStyle.Regular);
+        }
+
         private void Download()
         {
             if (_currentPlayer == null)
@@ -181,6 +193,7 @@ namespace PlayerViewer
         private async void btnSearch_Click(object sender, EventArgs e) => await Search();
         private void btnDownload_Click(object sender, EventArgs e) => Download();
         private async void btnClear_Click(object sender, EventArgs e) => await Clear();
+        private void imagePlayerSkin_Resize(object sender, EventArgs e) => AdjustNametagSize();
         private void TitleBar_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
