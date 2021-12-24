@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MCPlayerApiClient.DTOs
 {
-    public class PlayerDto
+    public sealed class PlayerDto
     {
         public string Name { get; set; }
         public Guid Id { get; set; }

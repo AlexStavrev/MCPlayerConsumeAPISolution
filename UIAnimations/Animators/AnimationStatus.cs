@@ -13,7 +13,7 @@ namespace VisualEffects.Animators
         public CancellationTokenSource CancellationToken { get; private set; }
         public bool IsCompleted { get; set; }
 
-        public AnimationStatus( CancellationTokenSource token, Stopwatch stopwatch )
+        public AnimationStatus(CancellationTokenSource token, Stopwatch stopwatch)
         {
             CancellationToken = token;
             _stopwatch = stopwatch;

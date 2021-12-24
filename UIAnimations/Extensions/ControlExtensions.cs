@@ -1,37 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-
-namespace VisualEffects
+﻿namespace VisualEffects
 {
     public static class ControlExtensions
     {
-        public static void SelectNextControl( this Control initialControl )
+        public static void SelectNextControl(this Control initialControl)
         {
-            if( initialControl != null )
+            if (initialControl != null)
             {
-                var ctrlSelected = initialControl.SelectNextControl( initialControl, true, true, false, false );
-                if( !ctrlSelected )
-                    SelectNextControl( initialControl.Parent );
+                var ctrlSelected = initialControl.SelectNextControl(initialControl, true, true, false, false);
+                if (!ctrlSelected)
+                    SelectNextControl(initialControl.Parent);
             }
         }
 
-        public static Bitmap? GetSnapshot( this Control control )
+        public static Bitmap? GetSnapshot(this Control control)
         {
-            if( control.Width <= 0 || control.Height <= 0 )
+            if (control.Width <= 0 || control.Height <= 0)
                 return null;
 
-            Bitmap image = new( control.Width, control.Height );
-            Rectangle targetBounds = new( 0, 0, control.Width, control.Height );
+            Bitmap image = new(control.Width, control.Height);
+            Rectangle targetBounds = new(0, 0, control.Width, control.Height);
 
-            control.DrawToBitmap( image, targetBounds );
+            control.DrawToBitmap(image, targetBounds);
             return image;
         }
 
-        public static Bitmap GetFormBorderlessSnapshot( this Form window )
+        public static Bitmap GetFormBorderlessSnapshot(this Form window)
         {
             using var bmp = new Bitmap(window.Width, window.Height);
             window.DrawToBitmap(bmp, new Rectangle(0, 0, window.Width, window.Height));

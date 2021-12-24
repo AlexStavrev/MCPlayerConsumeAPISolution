@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MCPlayerApiClient.ApiClient
 {
-    public class PlayerApiClient : IPlayerApiClient
+    public sealed class PlayerApiClient : IPlayerApiClient
     {
         private readonly RestClient _restClient;
         public PlayerApiClient(string apiUri) => _restClient = new RestClient(new Uri(apiUri));
@@ -25,7 +25,8 @@ namespace MCPlayerApiClient.ApiClient
             }
 
             PlayerDto player = response.Data;
-            if (player != null) {
+            if (player != null)
+            {
                 player.Names = await GetAllNameChangesAsync(player.Id.ToString());
             }
 
@@ -36,7 +37,7 @@ namespace MCPlayerApiClient.ApiClient
         {
             var response = await _restClient.RequestAsync<PlayerDto>(Method.GET, $"users/profiles/minecraft/{name}");
 
-            if(!response.IsSuccessful)
+            if (!response.IsSuccessful)
             {
                 throw new Exception($"Error retrieving UUID for '{name}'. Message was: {response.ErrorException?.Message}");
             }

@@ -14,7 +14,7 @@ using System.Windows.Forms;
 
 namespace PlayerViewer
 {
-    public partial class PlayerViewerForm : Form
+    public sealed partial class PlayerViewerForm : Form
     {
         readonly IPlayerApiClient _playerApiClient;
         private bool _inCooldown;
@@ -39,6 +39,7 @@ namespace PlayerViewer
                 _currentPlayer = null;
                 lblNametag.Text = string.Empty;
                 txtName.Text = string.Empty;
+                lblUUIDValue.Text = "00000000-0000-0000-0000-000000000000";
                 listBoxNames.ClearThreadSafe();
                 await LoadPlayerImageAsync(Guid.Parse("00000000-0000-0000-0000-000000000000"));
             }
@@ -66,45 +67,37 @@ namespace PlayerViewer
 
         private void Minimise()
         {
+            _formSize = ClientSize;
             WindowState = FormWindowState.Minimized;
         }
 
         private async Task Search()
         {
             if (_inCooldown) { return; }
-            if (txtName.Text == "")
+            if (string.IsNullOrEmpty(txtName.Text))
             {
                 _ = warningLblBar.ShowNotificationAsync(2000).ConfigureAwait(false);
-                return; 
+                return;
             }
             if (_currentPlayer != null && _currentPlayer.Name.Equals(txtName.Text, StringComparison.InvariantCultureIgnoreCase)) { return; }
-            _inCooldown = true;
 
+            _inCooldown = true;
             try
             {
                 var result = await _playerApiClient.GetPlayerByName(txtName.Text);
-                if(result != null)
+                if (result != null)
                 {
-                    _currentPlayer = result;
-                    lblNametag.Text = _currentPlayer.Name;
-
-                    List<Task> tasks = new()
-                    {
-                        Task.Run(() => LoadPlayerImageAsync(_currentPlayer.Id)),
-                        Task.Run(() => LoadPlayerNameChangesAsync(_currentPlayer.Id))
-                    };
-
-                    await Task.WhenAll(tasks);
+                    await LoadPlayerDataAsync(result);
                 }
                 else
                 {
                     _ = notificationLblBar.ShowNotificationAsync(2000).ConfigureAwait(false);
+                    throw new Exception();
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                _ = notificationLblBar.ShowNotificationAsync(2000).ConfigureAwait(false);
-                //MessageBox.Show($"Account with name '{txtName.Text}' doesn't exist.\nError was: {ex.Message}", "Unknown user", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _ = errorLblBar.ShowNotificationAsync(2000).ConfigureAwait(false);
             }
             finally
             {
@@ -112,9 +105,23 @@ namespace PlayerViewer
             }
         }
 
+        private async Task LoadPlayerDataAsync(PlayerDto player)
+        {
+            _currentPlayer = player;
+            lblNametag.Text = player.Name;
+            lblUUIDValue.Text = player.Id.ToString();
+
+            List<Task> tasks = new()
+            {
+                Task.Run(() => LoadPlayerImageAsync(player.Id)),
+                Task.Run(() => LoadPlayerNameChangesAsync(player.Id))
+            };
+
+            await Task.WhenAll(tasks);
+        }
+
         private async Task LoadPlayerImageAsync(Guid uuid)
         {
-            lblUUIDValue.Text = uuid.ToString();
             imagePlayerSkin.Image = await _playerApiClient.GetBodyImageFromUUIDAsync(uuid.ToString());
         }
 
@@ -167,7 +174,10 @@ namespace PlayerViewer
 
         private void AdjustNametagSize()
         {
-            lblNametag.Font = GetCustomFont(Properties.Resources.minecraft, Math.Min(imagePlayerSkin.Height / 20, 31), FontStyle.Regular);
+            if (imagePlayerSkin.Height != 0)
+            {
+                lblNametag.Font = GetCustomFont(Properties.Resources.minecraft, Math.Min(imagePlayerSkin.Height / 20, 31), FontStyle.Regular);
+            }
         }
 
         private void Download()

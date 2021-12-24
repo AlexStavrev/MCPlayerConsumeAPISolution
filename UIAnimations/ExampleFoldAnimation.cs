@@ -1,6 +1,6 @@
 ﻿using VisualEffects.Animations.Effects;
-using VisualEffects.Easing;
 using VisualEffects.Animators;
+using VisualEffects.Easing;
 
 namespace VisualEffects
 {
@@ -14,7 +14,7 @@ namespace VisualEffects
         public int Duration { get; set; }
         public int Delay { get; set; }
 
-        public ExampleFoldAnimation( Control control )
+        public ExampleFoldAnimation(Control control)
         {
             _cancellationTokens = new List<AnimationStatus>();
 
@@ -28,51 +28,51 @@ namespace VisualEffects
         public void Show()
         {
             int duration = this.Duration;
-            if( _cancellationTokens.Any( animation => !animation.IsCompleted ) )
+            if (_cancellationTokens.Any(animation => !animation.IsCompleted))
             {
-                var token = _cancellationTokens.First( animation => !animation.IsCompleted );
-                duration = (int)( token.ElapsedMilliseconds );
+                var token = _cancellationTokens.First(animation => !animation.IsCompleted);
+                duration = (int)(token.ElapsedMilliseconds);
             }
 
             //cancel hide animation if in progress
             this.Cancel();
 
-            var cT1 = this.Control.Animate( new HorizontalFoldEffect(),
-                 EasingFunctions.CircEaseIn, this.MaxSize.Height, duration, this.Delay );
+            var cT1 = this.Control.Animate(new HorizontalFoldEffect(),
+                 EasingFunctions.CircEaseIn, this.MaxSize.Height, duration, this.Delay);
 
-            var cT2 = this.Control.Animate( new VerticalFoldEffect(),
-                 EasingFunctions.CircEaseOut, this.MaxSize.Width, duration, this.Delay );
+            var cT2 = this.Control.Animate(new VerticalFoldEffect(),
+                 EasingFunctions.CircEaseOut, this.MaxSize.Width, duration, this.Delay);
 
-            _cancellationTokens.Add( cT1 );
-            _cancellationTokens.Add( cT2 );
+            _cancellationTokens.Add(cT1);
+            _cancellationTokens.Add(cT2);
         }
 
         public void Hide()
         {
             int duration = this.Duration;
 
-            if( _cancellationTokens.Any( animation => !animation.IsCompleted ) )
+            if (_cancellationTokens.Any(animation => !animation.IsCompleted))
             {
-                var token = _cancellationTokens.First( animation => !animation.IsCompleted );
-                duration = (int)( token.ElapsedMilliseconds );
+                var token = _cancellationTokens.First(animation => !animation.IsCompleted);
+                duration = (int)(token.ElapsedMilliseconds);
             }
 
             //cancel show animation if in progress
             this.Cancel();
 
-            var cT1 = this.Control.Animate( new HorizontalFoldEffect(),
-                EasingFunctions.CircEaseOut, this.MinSize.Height, duration, this.Delay );
+            var cT1 = this.Control.Animate(new HorizontalFoldEffect(),
+                EasingFunctions.CircEaseOut, this.MinSize.Height, duration, this.Delay);
 
-            var cT2 = this.Control.Animate( new VerticalFoldEffect(),
-                EasingFunctions.CircEaseIn, this.MinSize.Width, duration, this.Delay );
+            var cT2 = this.Control.Animate(new VerticalFoldEffect(),
+                EasingFunctions.CircEaseIn, this.MinSize.Width, duration, this.Delay);
 
-            _cancellationTokens.Add( cT1 );
-            _cancellationTokens.Add( cT2 );
+            _cancellationTokens.Add(cT1);
+            _cancellationTokens.Add(cT2);
         }
 
         public void Cancel()
         {
-            foreach( var token in _cancellationTokens )
+            foreach (var token in _cancellationTokens)
                 token.CancellationToken.Cancel();
 
             _cancellationTokens.Clear();

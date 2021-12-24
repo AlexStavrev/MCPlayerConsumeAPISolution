@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using VisualEffects.Animations.Effects;
+﻿using VisualEffects.Animations.Effects;
 
 namespace VisualEffects
 {
@@ -15,10 +10,10 @@ namespace VisualEffects
     {
         EffectInteractions Interaction { get; }
 
-        int GetCurrentValue( Control control );
-        void SetValue( Control control, int originalValue, int valueToReach, int newValue );
+        int GetCurrentValue(Control control);
+        void SetValue(Control control, int originalValue, int valueToReach, int newValue);
 
-        int GetMinimumValue( Control control );
-        int GetMaximumValue( Control control );
+        int GetMinimumValue(Control control);
+        int GetMaximumValue(Control control);
     }
 }

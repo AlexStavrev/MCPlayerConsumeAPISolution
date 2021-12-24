@@ -22,9 +22,10 @@ namespace PlayerViewer.CustomControls
         [Browsable(true), EditorBrowsable(EditorBrowsableState.Always), Bindable(true)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         [Description("The ForeColor of the close button")]
-        public Color ButtonColor {
+        public Color ButtonColor
+        {
             get => btnHideNotification.ForeColor;
-            set 
+            set
             {
                 btnHideNotification.ForeColor = value;
                 Invalidate();
@@ -49,7 +50,6 @@ namespace PlayerViewer.CustomControls
             await Task.Delay(milis);
             HideNotification();
         }
-        
 
         public void HideNotification()
         {

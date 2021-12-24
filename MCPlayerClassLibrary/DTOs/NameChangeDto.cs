@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace MCPlayerApiClient.DTOs
 {
-    public class NameChangeDto
+    public sealed class NameChangeDto
     {
         public string Name { get; set; }
 

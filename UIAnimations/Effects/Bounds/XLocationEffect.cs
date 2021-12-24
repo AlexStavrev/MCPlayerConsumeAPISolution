@@ -1,29 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-
-namespace VisualEffects.Animations.Effects
+﻿namespace VisualEffects.Animations.Effects
 {
     public class XLocationEffect : IEffect
     {
-        public int GetCurrentValue( Control control )
+        public int GetCurrentValue(Control control)
         {
             return control.Left;
         }
 
-        public void SetValue( Control control, int originalValue, int valueToReach, int newValue )
+        public void SetValue(Control control, int originalValue, int valueToReach, int newValue)
         {
             control.Left = newValue;
         }
 
-        public int GetMinimumValue( Control control )
+        public int GetMinimumValue(Control control)
         {
             return Int32.MinValue;
         }
 
-        public int GetMaximumValue( Control control )
+        public int GetMaximumValue(Control control)
         {
             return Int32.MaxValue;
         }

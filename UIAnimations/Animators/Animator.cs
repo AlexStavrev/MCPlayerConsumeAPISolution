@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using VisualEffects.Animations.Effects;
-using VisualEffects.Easing;
 using VisualEffects.Animators;
+using VisualEffects.Easing;
 
 namespace VisualEffects
 {
@@ -85,8 +85,8 @@ namespace VisualEffects
                  //main animation timer tick
                  animationTimer.Elapsed += (o, e2) =>
                   {
-                     //cancellation support
-                     if (cancelTokenSource.Token.IsCancellationRequested)
+                      //cancellation support
+                      if (cancelTokenSource.Token.IsCancellationRequested)
                       {
                           animationStatus.IsCompleted = true;
                           animationTimer.Stop();
@@ -95,8 +95,8 @@ namespace VisualEffects
                           return;
                       }
 
-                     //main logic
-                     bool increasing = originalValue < valueToReach;
+                      //main logic
+                      bool increasing = originalValue < valueToReach;
 
                       int minValue = Math.Min(originalValue, valueToReach);
                       int maxValue = Math.Abs(valueToReach - originalValue);

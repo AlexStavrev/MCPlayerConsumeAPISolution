@@ -58,6 +58,7 @@ namespace PlayerViewer
             this.tooltipDownload = new System.Windows.Forms.ToolTip(this.components);
             this.saveFileSkinDialog = new System.Windows.Forms.SaveFileDialog();
             this.warningLblBar = new PlayerViewer.CustomControls.NotificationLabelBar();
+            this.errorLblBar = new PlayerViewer.CustomControls.NotificationLabelBar();
             ((System.ComponentModel.ISupportInitialize)(this.imagePlayerSkin)).BeginInit();
             this.panelPicture.SuspendLayout();
             this.panelMain.SuspendLayout();
@@ -452,6 +453,20 @@ namespace PlayerViewer
             this.warningLblBar.TabIndex = 5;
             this.warningLblBar.Text = "Input a player username";
             // 
+            // errorLblBar
+            // 
+            this.errorLblBar.BackColor = System.Drawing.Color.IndianRed;
+            this.errorLblBar.ButtonColor = System.Drawing.Color.Maroon;
+            this.errorLblBar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.errorLblBar.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.errorLblBar.ForeColor = System.Drawing.Color.White;
+            this.errorLblBar.Location = new System.Drawing.Point(0, 40);
+            this.errorLblBar.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.errorLblBar.Name = "errorLblBar";
+            this.errorLblBar.Size = new System.Drawing.Size(884, 0);
+            this.errorLblBar.TabIndex = 6;
+            this.errorLblBar.Text = "Something went wrong! Check your connection and try again";
+            // 
             // PlayerViewerForm
             // 
             this.AcceptButton = this.btnSearch;
@@ -461,6 +476,7 @@ namespace PlayerViewer
             this.ClientSize = new System.Drawing.Size(884, 517);
             this.Controls.Add(this.warningLblBar);
             this.Controls.Add(this.notificationLblBar);
+            this.Controls.Add(this.errorLblBar);
             this.Controls.Add(this.panelMain);
             this.Controls.Add(this.panelNavBar);
             this.Font = new System.Drawing.Font("Segoe UI Symbol", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -518,6 +534,7 @@ namespace PlayerViewer
         private System.Windows.Forms.Label lblNametag;
         private System.Windows.Forms.Button btnClear;
         private CustomControls.NotificationLabelBar warningLblBar;
+        private CustomControls.NotificationLabelBar errorLblBar;
     }
 }
 
