@@ -92,7 +92,6 @@ namespace PlayerViewer
                 else
                 {
                     _ = notificationLblBar.ShowNotificationAsync(2000).ConfigureAwait(false);
-                    throw new Exception();
                 }
             }
             catch
