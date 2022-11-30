@@ -1,0 +1,41 @@
+name: CICD
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+env:
+  DOTNET_VERSION: '6.0.x'
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET Core SDK ${{ env.DOTNET_VERSION }}
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+      - name: Install dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+  DeployDev:
+    runs-on: ubuntu-latest
+    needs: [Build]
+    name: Deploy to Dev 
+    environment: 
+      name: Development
+    steps:
+      - name: Deploy
+        run: dotnet test --no-build --verbosity normal
+  DeployProd:
+    name: Deploy to Production 
+    needs: [DeployDev]
+    runs-on: ubuntu-latest
+    environment: 
+      name: Production
+    steps:
+      - name: Deploy
+        run: echo "Deployed" to Production...
