@@ -29,7 +29,7 @@ jobs:
       name: Development
     steps:
       - name: Deploy
-        run: dotnet test MCPlayerConsumeAPISolution/MCPlayerConsumeAPISolution.sln --no-build --verbosity normal
+        run: dotnet test ./MCPlayerConsumeAPISolution.sln --no-build --verbosity normal
   DeployProd:
     name: Deploy to Production 
     needs: [DeployDev]
