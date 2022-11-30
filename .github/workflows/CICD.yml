@@ -22,6 +22,8 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release --no-restore
   DeployDev:
+    env:
+      SOLUTION: 'MCPlayerConsumeAPISolution.sln'
     runs-on: windows-latest
     needs: [Build]
     name: Deploy to Dev 
@@ -29,7 +31,7 @@ jobs:
       name: Development
     steps:
       - name: Deploy
-        run: dotnet test ./MCPlayerConsumeAPISolution/MCPlayerConsumerAPI/TestMCPlayerConsumerAPI.csproj --no-build --verbosity normal
+        run: dotnet test $SOLUTION --no-build --verbosity normal
   DeployProd:
     name: Deploy to Production 
     needs: [DeployDev]
