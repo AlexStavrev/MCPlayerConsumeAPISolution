@@ -30,8 +30,10 @@ jobs:
     environment: 
       name: Development
     steps:
+      - name: Debug
+        run: ls
       - name: Deploy
-        run: dotnet test $SOLUTION --no-build --verbosity normal
+        run: dotnet test MCPlayerConsumeAPISolution.sln --no-build --verbosity normal
   DeployProd:
     name: Deploy to Production 
     needs: [DeployDev]
