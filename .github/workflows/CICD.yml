@@ -11,6 +11,8 @@ env:
 jobs:
   Build:
     runs-on: windows-latest
+    environment: 
+      name: Development
     steps:
       - uses: actions/checkout@v3
       - name: Setup .NET Core SDK ${{ env.DOTNET_VERSION }}
@@ -25,6 +27,8 @@ jobs:
     env:
       SOLUTION: 'MCPlayerConsumeAPISolution.sln'
     runs-on: windows-latest
+    environment: 
+      name: Development
     needs: [Build]
     steps:
       - uses: actions/checkout@v3
@@ -36,6 +40,8 @@ jobs:
         run: dotnet restore
       - name: Build
         run: dotnet build --configuration Release --no-restore
+      - name: Test
+        run: echo "Testing"...
   DeployProd:
     name: Deploy to Production 
     needs: [DeployDev]
