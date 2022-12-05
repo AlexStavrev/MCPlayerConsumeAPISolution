@@ -1,5 +1,7 @@
 [msbuild]
-project = "../MCPlayerConsumeAPISolution.sln"
+project = "../MCPlayerClassLibrary/MCPlayerApiClient.csproj"
+[msbuild.properties]
+PublishTrimmed = true
 [github]
 user = "WrexBG"
 repo = "MCPlayerConsumeAPISolution"
