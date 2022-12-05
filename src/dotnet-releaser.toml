@@ -3,3 +3,5 @@ project = "../MCPlayerConsumeAPISolution.sln"
 [github]
 user = "WrexBG"
 repo = "MCPlayerConsumeAPISolution"
+[nuget]
+publish = false
